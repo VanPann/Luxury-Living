@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bildergalerie mit wunderschönen Stränden: Batis-Strand und Paradise-Strand.">
+    <title>Bildergalerie: Batis- und Paradise-Strand</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #0066cc; /* Griechisches Blau */
+            margin: 0;
+            padding: 0;
+            color: white;
+            overflow-y: auto; /* Ermöglicht vertikales Scrollen */
+        }
+
+        .recommendation {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px #000;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-top: 100px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border: 3px solid #fff;
+            border-radius: 10px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, filter 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Lightbox-Stil */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            margin-bottom: 20px;
+        }
+
+        .lightbox .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+        }
+
+        .nav-buttons span {
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Videostil */
+        #videoContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 2s ease;
+        }
+
+        #introVideo {
+            width: 80%;
+            height: auto;
+        }
+
+        #content {
+            display: none;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        /* Mobile-Responsive */
+        @media (max-width: 768px) {
+            .gallery img {
+                width: 100%;
+                height: auto;
+            }
+            .recommendation {
+                font-size: 1.5em;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Video-Container -->
+    <div id="videoContainer">
+        <video id="introVideo" autoplay muted controls>
+            <source src="Intro.mp4" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht. Hier ist ein <a href="Intro.mp4">Download-Link</a> für das Video.
+        </video>
+    </div>
+
+    <!-- Empfehlung für Strände -->
+    <div class="recommendation" aria-label="Empfohlene Strände">🌴 Empfehlenswerte Strände</div>
+
+    <!-- Hauptinhalt -->
+    <div id="content">
+        <!-- Paradise-Strand -->
+        <h1>Paradise-Strand</h1>
+        <div class="gallery" id="paradiseGallery">
+            <img src="Paradise 1.webp" alt="Paradise-Strand mit Palmen bei Sonnenuntergang" title="Paradise-Strand bei Sonnenuntergang" loading="lazy" onclick="openLightbox(0, 'paradise')">
+            <img src="Paradise 2.webp" alt="Paradise-Strand mit klarem Wasser" title="Paradise-Strand mit klarem Wasser" loading="lazy" onclick="openLightbox(1, 'paradise')">
+            <img src="Paradise 3.webp" alt="Paradise-Strand und sandiger Küstenabschnitt" title="Paradise-Strand und sandiger Küstenabschnitt" loading="lazy" onclick="openLightbox(2, 'paradise')">
+            <img src="Paradise 4.webp" alt="Paradise-Strand unter strahlend blauem Himmel" title="Paradise-Strand unter strahlend blauem Himmel" loading="lazy" onclick="openLightbox(3, 'paradise')">
+            <img src="Paradise 5.webp" alt="Paradise-Strand mit entspannenden Wellen" title="Paradise-Strand mit entspannenden Wellen" loading="lazy" onclick="openLightbox(4, 'paradise')">
+            <img src="Paradise 6.webp" alt="Paradise-Strand mit weichem Sand" title="Paradise-Strand mit weichem Sand" loading="lazy" onclick="openLightbox(5, 'paradise')">
+            <img src="Paradise 7.webp" alt="Paradise-Strand bei Sonnenuntergang" title="Paradise-Strand bei Sonnenuntergang" loading="lazy" onclick="openLightbox(6, 'paradise')">
+            <img src="Paradise 8.webp" alt="Paradise-Strand mit grünen Palmen" title="Paradise-Strand mit grünen Palmen" loading="lazy" onclick="openLightbox(7, 'paradise')">
+        </div>
+
+        <!-- Batis-Strand -->
+        <h1>Batis-Strand</h1>
+        <div class="gallery" id="batisGallery">
+            <img src="Batis-Strand.jpg" alt="Batis-Strand mit felsigen Küsten" title="Batis-Strand mit felsigen Küsten" loading="lazy" onclick="openLightbox(0, 'batis')">
+            <img src="batis-paralies.jpg" alt="Batis-Strand bei ruhigem Wasser" title="Batis-Strand bei ruhigem Wasser" loading="lazy" onclick="openLightbox(1, 'batis')">
+            <img src="batis_camping10.jpg" alt="Batis-Campingplatz mit schöner Aussicht" title="Batis-Campingplatz mit schöner Aussicht" loading="lazy" onclick="openLightbox(2, 'batis')">
+            <img src="batis_camping11.jpg" alt="Batis-Campingplatz mit grüner Umgebung" title="Batis-Campingplatz mit grüner Umgebung" loading="lazy" onclick="openLightbox(3, 'batis')">
+            <img src="batis_camping9.jpg" alt="Batis-Campingplatz mit Zelt und Blick auf das Meer" title="Batis-Campingplatz mit Zelt und Blick auf das Meer" loading="lazy" onclick="openLightbox(4, 'batis')">
+            <img src="batis_camping3.jpg" alt="Batis-Campingplatz mit Sonnenuntergang" title="Batis-Campingplatz mit Sonnenuntergang" loading="lazy" onclick="openLightbox(5, 'batis')">
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+        <div class="nav-buttons">
+            <span aria-label="Bild vorherige" onclick="changeImage(-1)">&#10094;</span>
+            <span aria-label="Bild nächste" onclick="changeImage(1)">&#10095;</span>
+        </div>
+        <img id="lightboxImage" src="" alt="Lightbox Bild">
+    </div>
+
+    <script>
+        // Video-Steuerung
+        const videoContainer = document.getElementById('videoContainer');
+        const content = document.getElementById('content');
+        const introVideo = document.getElementById('introVideo');
+
+        introVideo.onended = () => {
+            videoContainer.style.opacity = '0'; // Video ausblenden
+            setTimeout(() => {
+                videoContainer.style.display = 'none';
+                content.style.display = 'block';
+                setTimeout(() => content.style.opacity = '1', 0);
+            }, 2000);
+        };
+
+        // Lightbox-Funktion
+        let currentIndex = 0;
+        let currentGallery = [];
+
+        function openLightbox(index, gallery) {
+            currentGallery = gallery === 'paradise' ? document.getElementById('paradiseGallery').getElementsByTagName('img') : document.getElementById('batisGallery').getElementsByTagName('img');
+            currentIndex = index;
+            const image = currentGallery[currentIndex];
+            document.getElementById('lightboxImage').src = image.src;
+            document.getElementById('lightbox').style.display = 'flex';
+            document.getElementById('lightbox').style.opacity = '1';
+            document.getElementById('lightbox').setAttribute('aria-hidden', 'false');
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = currentGallery.length - 1;
+            } else if (currentIndex >= currentGallery.length) {
+                currentIndex = 0;
+            }
+            const image = currentGallery[currentIndex];
+            document.getElementById('lightboxImage').src = image.src;
+        }
+
+        // Schließen der Lightbox
+        document.getElementById('lightbox').onclick = function (event) {
+            if (event.target === this) {
+                this.style.opacity = '0';
+                setTimeout(() => {
+                    this.style.display = 'none';
+                    this.setAttribute('aria-hidden', 'true');
+                }, 500);
+            }
+        };
+    </script>
+</body>
+</html>
